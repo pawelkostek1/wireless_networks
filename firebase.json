@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "Hosting",
+    "public": "dashboard_website",
     "ignore": [
       "firebase.json",
       "**/.*",
