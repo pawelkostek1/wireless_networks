@@ -2,7 +2,7 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint . ",
     "serve": "firebase serve --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
@@ -10,8 +10,12 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "firebase": "^5.6.0",
     "firebase-admin": "~6.0.0",
-    "firebase-functions": "^2.1.0"
+    "firebase-functions": "^2.1.0",
+    "ttn": "^2.3.1"
   },
   "devDependencies": {
     "eslint": "^4.12.0",
