@@ -16,6 +16,7 @@
   // Record of temperature and humidity
   var temperature = ["0"];
   var humidity = ["0"];
+  var sound = ["0"];
   var rssi = [];
   // var gateways = [];
   var gateway1 = new Object();
@@ -27,6 +28,7 @@
   window.onload = function () {
     var temperatureDataPoints = [{y : 0}];
     var humidityDataPoints = [{y: 0}];
+    var soundDataPoints = [{y: 0}];
     var rssiDataPoints = [];
     var snrDataPoints = [];
     var chart = new CanvasJS.Chart("chartContainer", {
@@ -44,6 +46,11 @@
         showInLegend: true,
         name: "Humidity",
         dataPoints: humidityDataPoints
+      },{
+        type: "spline",
+        showInLegend: true,
+        name: "Sound",
+        dataPoints: soundDataPoints
       }]
     });
     chart.render();
@@ -57,7 +64,7 @@
       },
       axisY: {
         title: "RSSI",
-        suffix: "/ -dB",
+        suffix: "/ dB",
         reversed: false
       },
       axisX2: {
@@ -103,12 +110,21 @@
     function updateTemperatureChart(value) {
       temperatureDataPoints.push({y : value});
       humidityDataPoints.push({y: humidity[humidity.length - 1]});
+      soundDataPoints.push({y: sound[sound.length - 1]});
       chart.render();
     }
 
     function updateHumidityChart(value) {
       humidityDataPoints.push({y : value});
       temperatureDataPoints.push({y: temperature[temperature.length - 1]});
+      soundDataPoints.push({y: sound[sound.length - 1]});
+      chart.render();
+    }
+
+    function updateSoundChart(value) {
+      soundDataPoints.push({y : value});
+      temperatureDataPoints.push({y: temperature[temperature.length - 1]});
+      humidityDataPoints.push({y: humidity[humidity.length - 1]});
       chart.render();
     }
 
@@ -140,6 +156,7 @@
     const firebaseRef = firebase.database().ref().child('fix');
     const firebaseTemperature = firebaseRef.child('payload_raw').child('0');
     const firebaseHumidity = firebaseRef.child('payload_raw').child('1');
+    const firebaseSound = firebaseRef.child('payload_raw').child('2');
     const firebaseGateways = firebaseRef.child('metadata').child('gateways');
 
     //take snapshot of all the sensor data
@@ -158,6 +175,14 @@
       updateHumidityChart(value);
     });
 
+    //take snapshot of all the sensor data
+    firebaseSound.on('value', snap => {
+      sound.push(parseInt(JSON.stringify(snap.val(), null, 3)));
+      value = sound[sound.length - 1];
+      console.log("Sound: " + sound);
+      updateSoundChart(value);
+    });
+
     /*-------*/
     //Identification Information
     //location: longitude, latitude, gtw_id
@@ -173,21 +198,21 @@
       var i;
       for(i = 0; i < checkGateways(); i ++) {
         if(snap.child(i).child('gtw_id').val() == 'eui-7276fffffe01028c') {
-          gateway1.rssi = Math.abs(snap.child(i).child('rssi').val());
+          gateway1.rssi = snap.child(i).child('rssi').val();
           gateway1.id = 'eui-7276fffffe01028c';
           gateway1.location = 'Physics';
           gateway1.snr = snap.child(i).child('snr').val();
           // console.log(gateway1);
         }
         if(snap.child(i).child('gtw_id').val() == 'eui-b827ebfffeac4b12') {
-          gateway2.rssi = Math.abs(snap.child(i).child('rssi').val());
+          gateway2.rssi = snap.child(i).child('rssi').val();
           gateway2.id = 'eui-b827ebfffeac4b12';
           gateway2.location = 'ECS';
           gateway2.snr = snap.child(i).child('snr').val();
           // console.log(gateway2);
         }
         if(snap.child(i).child('gtw_id').val() == 'eui-7276fffffe0103f0') {
-          gateway3.rssi = Math.abs(snap.child(i).child('rssi').val());
+          gateway3.rssi = snap.child(i).child('rssi').val();
           gateway3.id = 'eui-7276fffffe0103f0';
           gateway3.location = 'Building 7 (1)';
           gateway3.snr = snap.child(i).child('snr').val();
@@ -195,7 +220,7 @@
         }
         if(snap.child(i).child('gtw_id').val() == 'eui-b827ebfffe2d3798') {
           // rssi[3] = snap.child(i).child('rssi').val();
-          gateway4.rssi = Math.abs(snap.child(i).child('rssi').val());
+          gateway4.rssi = snap.child(i).child('rssi').val();
           gateway4.id = 'eui-b827ebfffe2d3798';
           gateway4.location = 'Building 7 (2)';
           gateway4.snr = snap.child(i).child('snr').val();

@@ -1,5 +1,6 @@
 {
   "projects": {
-    "lpwan2": "lpwan2-wireless-networks"
+    "lpwan2": "lpwan2-wireless-networks",
+    "default": "lpwan2-wireless-networks"
   }
 }

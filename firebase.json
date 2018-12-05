@@ -1,10 +1,18 @@
 {
   "hosting": {
     "public": "dashboard_website",
+	"rewrites": [{
+		"source": "/bigben", "function": "bigben"
+	}],
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ]
+  },
+  "functions": {
+    "predeploy": [
+      "npm --prefix functions run lint"
     ]
   }
 }
