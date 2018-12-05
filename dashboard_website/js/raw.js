@@ -1,6 +1,6 @@
 // Author: Dominic Heaton
 // LPWAN2 - University of Southampton
-(function(){
+
 
   // Initialize Firebase
   var config = {
@@ -38,4 +38,4 @@
     completeData.innerText = JSON.stringify(snap.val(), null, 3);
   });
 
-}());
+
