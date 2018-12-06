@@ -50,16 +50,30 @@ var chart = new Chart(ctx, {
                 display: true,
                 position: 'left',
                 id: 'temperature',
+                scaleLabel: {
+                    labelString: 'Temperature',
+                    display: true,
+                },
             }, {
                 type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
                 display: true,
                 position: 'right',
                 id: 'humidity',
+                scaleLabel: {
+                    labelString: 'Humidity',
+                    display: true,
+                },
 
                 // grid line settings
                 gridLines: {
                     drawOnChartArea: false, // only want the grid lines for one axis to show up
                 },
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    labelString: 'Time',
+                    display: true,
+                }
             }],
         }
     }
@@ -87,6 +101,16 @@ var chart2 = new Chart(ctx, {
             yAxes: [{
                 type: 'logarithmic', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
                 display: true,
+                scaleLabel: {
+                    labelString: 'Voltage',
+                    display: true,
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    labelString: 'Time',
+                    display: true,
+                }
             }],
         }
     }
@@ -160,6 +184,8 @@ firebaseTime.on('value', function(snapshot) {
     var time = moment(snapshot.val()).format("HH:mm");
     chart.data.labels.push(time);
     chart.update();
+    chart2.data.labels.push(time);
+    chart2.update();
 });
 
 firebaseGateways.on('value', snap => {

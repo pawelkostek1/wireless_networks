@@ -11,8 +11,8 @@ const app = express();
 app.use(cors({ origin: true }));
 
 // Initialize ttn API
-var appID = "lpwan2soton"
-var accessKey = "ttn-account-v2.Jj5MgeF1bzbqM7_CVstjmjrp3vKuyfKjsWGyGaiwXzM"
+//var appID = "lpwan2soton"
+//var accessKey = "ttn-account-v2.Jj5MgeF1bzbqM7_CVstjmjrp3vKuyfKjsWGyGaiwXzM"
 
 // Initialize Firebase
 var config = {
