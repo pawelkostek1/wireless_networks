@@ -81,12 +81,24 @@
 					<div class="card mb-3">
 						<div class="card-header">
 							<i class="fas fa-chart-area"></i>
-							Sensor Data
+							Temperature & Humidity Measurements
 						</div>
 						<div class="card-footer small text-muted">Live readings from the sensors are shown in this graph below. As data is received the graph will update.</div>
 						<div class="card-body">
 							<!--<div id="chartContainer" style = "height: 300px; width: 100%;"></div>-->
 							<canvas id="weatherChart"></canvas>
+						</div>
+						<div class="card-footer small text-muted">Updated today at 11:59 PM</div>
+					</div>
+					<div class="card mb-3">
+						<div class="card-header">
+							<i class="fas fa-chart-area"></i>
+							Noise measurements
+						</div>
+						<div class="card-footer small text-muted">Live readings from the sensors are shown in this graph below. As data is received the graph will update.</div>
+						<div class="card-body">
+							<!--<div id="chartContainer" style = "height: 300px; width: 100%;"></div>-->
+							<canvas id="noiseChart"></canvas>
 						</div>
 						<div class="card-footer small text-muted">Updated today at 11:59 PM</div>
 					</div>
@@ -99,7 +111,7 @@
 						</div>
 						<div class="card-footer small text-muted">Live RSSI measurements from the gateways that received the transmitted packet of information from the Arduino.</div>
 						<div class="card-body">
-							<div id="chartContainer2" style = "height: 300px; width: 100%;"></div>
+							<canvas id="rssiChart"></canvas>
 						</div>
 						<div class="card-footer small text-muted">Updated today at 11:59 PM</div>
 					</div>
@@ -112,7 +124,7 @@
 						</div>
 						<div class="card-footer small text-muted">Live SNR measurements from the gateways that received the transmitted packet of information from the arduino.</div>
 						<div class="card-body">
-							<div id="chartContainer3" style = "height: 300px; width: 100%;"/></div>
+							<canvas id="snrChart"></canvas>
 						</div>
 						<div class="card-footer small text-muted">Updated today at 11:59 PM</div>
 					</div>
@@ -161,6 +173,7 @@
 		<!--<script src="js/demo/datatables-demo.js"></script>-->
 		<script src="js/chart.js"></script>
 		<script src="vendor/canvas/canvasjs.min.js"></script>
+		<script src="vendor/moment/moment.min.js"></script>
 	
 	</body>
 </html>
