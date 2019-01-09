@@ -1,6 +1,6 @@
 // Author: Pawel Kostkowski
 // LPWAN2 - University of Southampton
-
+(function () {
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyAu-3f0gwQxpv7_xyisyGoBUtHymejxmcQ",
@@ -181,7 +181,7 @@ firebaseNoise.on('value', function(snapshot) {
 firebaseTime.on('value', function(snapshot) {
     console.log("Time: " + snapshot.val());
     console.log("Parsed time: " + moment(snapshot.val()).format("HH:mm"));
-    var time = moment(snapshot.val()).format("HH:mm");
+    var time = moment(snapshot.val()).add(-8, 'hour').format("HH:mm");
     chart.data.labels.push(time);
     chart.update();
     chart2.data.labels.push(time);
@@ -213,3 +213,5 @@ firebaseGateways.on('value', snap => {
     chart3.update();
     chart4.update();
 });
+
+})();
